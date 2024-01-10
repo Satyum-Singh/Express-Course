@@ -46,6 +46,13 @@ app.get(
   }
 );
 
+// Route Parameters
+app.get("/groceries/:item", (req, res) => {
+  const { item } = req.params;
+  const grocery = groceries.find((grocery) => grocery.item === item);
+  res.send(grocery);
+});
+
 // POST Request
 app.post("/groceries", (req, res) => {
   console.log(req.body);
