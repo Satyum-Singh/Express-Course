@@ -1,4 +1,6 @@
 const express = require("express");
+const groceriesRouter = require("./routes/groceries");
+
 const app = express();
 const port = 3001;
 
@@ -15,47 +17,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/groceries',groceriesRouter);
+
 // Creating Server
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
-const groceries = [
-  {
-    item: "Hot CHocolate",
-    quantity: 3,
-  },
-  {
-    item: "Kaffee",
-    quantity: 1,
-  },
-  {
-    item: "Milch",
-    quantity: 2,
-  },
-];
 
-// GET Request
-app.get(
-  "/groceries",
-  //   Applying middleware to the endpoint
-  (req, res, next) => {
-    console.log("Before handling request");
-    next();
-  },
-  (req, res, next) => {
-    res.send(groceries);
-  }
-);
 
-// Route Parameters
-app.get("/groceries/:item", (req, res) => {
-  const { item } = req.params;
-  const grocery = groceries.find((grocery) => grocery.item === item);
-  res.send(grocery);
-});
 
-// POST Request
-app.post("/groceries", (req, res) => {
-  console.log(req.body);
-  groceries.push(req.body);
-  res.send(201);
-});
