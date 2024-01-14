@@ -1,5 +1,6 @@
 const express = require("express");
 const groceriesRouter = require("./routes/groceries");
+const marketsRouter = require("./routes/markets");
 
 const app = express();
 const port = 3001;
@@ -17,11 +18,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/groceries',groceriesRouter);
+app.use("/groceries", groceriesRouter);
+
+app.use("/markets", marketsRouter);
 
 // Creating Server
 app.listen(port, () => console.log(`Server running on port ${port}`));
-
-
-
-
