@@ -37,4 +37,5 @@ router.get("/", (req, res) => {
 
 module.exports = router;
 
-
+// Difference between query and params - is that query is used to filter the data,the resources which are trying to retrieve from the database
+//                                     - and params is used to get the specific data or resource from the database
