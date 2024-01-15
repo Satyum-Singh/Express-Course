@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const groceriesRouter = require("./routes/groceries");
 const marketsRouter = require("./routes/markets");
 
@@ -11,6 +12,7 @@ const port = 3001;
 //            - it has 3 parameters (req, res, next) = next function is used to execute the next middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Creating a global middleware which is executed for every request
 app.use((req, res, next) => {
@@ -19,7 +21,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/groceries", groceriesRouter);
-
 app.use("/markets", marketsRouter);
 
 // Creating Server

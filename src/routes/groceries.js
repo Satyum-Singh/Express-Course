@@ -29,12 +29,16 @@ router.get(
     next();
   },
   (req, res, next) => {
+    res.cookie("Visited", true, {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
     res.send(groceries);
   }
 );
 
 // Route Parameters
 router.get("/:item", (req, res) => {
+  console.log(req.cookies);
   const { item } = req.params;
   const grocery = groceries.find((grocery) => grocery.item === item);
   res.send(grocery);
