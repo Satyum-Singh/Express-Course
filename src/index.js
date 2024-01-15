@@ -1,5 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const groceriesRouter = require("./routes/groceries");
 const marketsRouter = require("./routes/markets");
 
@@ -13,6 +14,13 @@ const port = 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: "ijwnvoisneironoewifn",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // Creating a global middleware which is executed for every request
 app.use((req, res, next) => {
